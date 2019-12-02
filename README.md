@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This web application is available at [gascr.herokuapp.com](https://gascr.herokuapp.com/). All data is returned in JSON format.
 
-Things you may want to cover:
+Program will calculate weekly trend as either positive or negative, with some intensity. The day of week effect is also available.
 
-* Ruby version
+## Configuration ##
 
-* System dependencies
+1. Set environment variable `EIA_KEY` via access from [EIA's OpenData API](https://www.eia.gov/opendata/qb.php)
 
-* Configuration
+## Database ##
 
-* Database creation
+1. Run `rails db:migrate`
+2. Access page `http://hostname/trends` will update
 
-* Database initialization
+## Deployment instructions ##
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. You may need to change the production database in file `gascr/config/database.yml`
