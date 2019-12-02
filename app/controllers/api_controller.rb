@@ -49,12 +49,14 @@ class ApiController < ApplicationController
       )
     end
 
+    Statistic.find_or_create_by(series: 'log')
+      .update_attribute(:value, Time.current.to_i)
     puts "Loaded oil data"
   end
 
   def load_data
-    last = Statistic.order(period: :desc).first
-    populate_data unless (last && Date.parse(last.period.to_s) > 2.weeks.ago)
+    last = Statistic.find_by(series: 'log')
+    populate_data unless (last && last.value > 1.week.ago.to_i)
 
     @oil = Statistic.order(period: :desc).where(series: 'oil').limit(3)
     @petrol = Statistic.order(period: :desc).where(series: 'la').limit(3)
@@ -99,17 +101,16 @@ class ApiController < ApplicationController
 
   def trends
     result = {
-      trend: find_trend,
+      trend: find_trend
     }
     render json: result
   end
 
   def all
-    # coal = Nokogiri(open('https://www.eia.gov/coal/markets/'))
-#    @coal = coal
-#    @oil = oil
-#    @cng = cng
-#    @ind = ind
+    # @coal = coal
+    # @oil = oil
+    # @cng = cng
+    # @ind = ind
   end
 
   private
