@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root 'api#wakeup'
   get '/brent', to: 'api#brent'
   get '/all', to: 'api#all'
+  get '/trends', to: 'api#trends'
 end
