@@ -82,26 +82,17 @@ class ApiController < ApplicationController
 
   def day_trend
     case Date.current.day
-    when 1
-      -1
-    when 2
-      -1
-    when 3
-      0
-    when 4
-      1
-    when 5
-      1
-    when 6
-      0
-    when 7
-      -1
+    when 4..6
+      0.01
+    else
+      -0.006
     end
   end
 
   def trends
     result = {
-      trend: find_trend
+      trend: find_trend,
+      cycle: day_trend
     }
     render json: result
   end
